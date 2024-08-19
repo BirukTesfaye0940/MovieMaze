@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MovieMaze
 Movie Database
 Welcome to the Movie Database project! This application allows users to explore and manage a comprehensive collection of movies and TV shows. Here’s a brief overview of its features:
@@ -28,3 +29,13 @@ Contributions are welcome! If you have suggestions or find issues, please feel f
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
+=======
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+>>>>>>> master

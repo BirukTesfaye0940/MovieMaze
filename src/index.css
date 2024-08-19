@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --primary: #101820;
+  --secondary: #FFFF00;
+  --tertiary: #F0F0F0;
+
+  font-family: 'Poppins', 'Times New Roman', Times, serif, 'Pacifico';
+
+  color-scheme: light dark;
+  color: var(--primary);
+  background-color: var(--tertiary);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply m-0 tracking-wide bg-tertiary;
+}
+
+* {
+  color: var(--primary);
+  margin: 0;
+}
+
+.logo {
+  @apply text-secondary font-pacifico text-lg;
+}
+
+.nav-link {
+  @apply text-sm md:text-lg no-underline p-1 text-tertiary;
+}
+
+.nav-link:hover {
+  @apply underline underline-offset-2 decoration-secondary;
+}
+
+.nav-link.active {
+  @apply underline underline-offset-2 decoration-2 decoration-secondary font-medium;
+}
+
+input::placeholder {
+  @apply text-gray-400;
+}
+
+@media (max-width: 800px) {
+  .search-button input {
+    @apply w-52;
+  }
+}
+
+.mojo {
+  @apply font-pacifico m-2
+}
+
+
+/* Additional CSS for hover dropdown */
+.vertical-dots:active + .dropdown-menu {
+  display: block;
+}

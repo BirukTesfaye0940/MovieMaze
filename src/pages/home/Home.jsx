@@ -1,32 +1,35 @@
 import { useContext, useEffect, useRef } from 'react';
 import { GlobalContext } from '../../context';
 import HomeBigCard from '../../components/home-big-card';
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { FaChevronRight, FaChevronLeft, FaTruckLoading } from "react-icons/fa";
 import MainCard from '../../components/main-card/MainCard';
 import MainCardTv from '../../components/main-card/mainCardTv';
+import { FaRegWindowClose } from "react-icons/fa";
 
 const screenWidth = (window.innerWidth) - 50;
 
 function Home() {
-  const { 
-    searchResults, 
+  const {
+    searchResults,
     loading, setLoading,
     showSearchResults, setShowSearchResults,
-    popularMoviesList, 
-    trendingMoviesList, 
-    PopularTvshowsList, 
-    trendingTvshowsList, 
+    popularMoviesList,
+    trendingMoviesList,
+    PopularTvshowsList,
+    trendingTvshowsList,
     latestMovies, latestTvShows,
     getPopularMovies, getTrendingMovies, getPopularTvshows, getTrendingTvshows, getLatestMovies,
     getLatestTvshows
-   } = useContext(GlobalContext);
+  } = useContext(GlobalContext);
+
+  const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w185';
 
   const elementRef = useRef(null);
-  const smallElementRef= useRef(null);
-  const smallElementRef2= useRef(null);
-  const smallElementRef3= useRef(null);
-  const smallElementRef4= useRef(null);
-  const smallElementRef5= useRef(null);
+  const smallElementRef = useRef(null);
+  const smallElementRef2 = useRef(null);
+  const smallElementRef3 = useRef(null);
+  const smallElementRef4 = useRef(null);
+  const smallElementRef5 = useRef(null);
 
   function closeModal() {
     setShowSearchResults(false);
@@ -50,28 +53,28 @@ function Home() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='w-full h-screen flex justify-center items-center'><FaTruckLoading /></div>;
   }
 
   return (
     <div>
       <div className='relative mx-4 p-3'>
-        <FaChevronLeft 
+        <FaChevronLeft
           className='hidden sm:block absolute left-[-6px] top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-3xl text-gray-700 pr-3'
           onClick={() => scrollLeft(elementRef.current)}
         />
-        <div 
+        <div
           className='relative flex gap-5 overflow-x-auto scrollbar-hide p-4 scroll-smooth'
           ref={elementRef}
         >
-          {popularMoviesList && popularMoviesList.length ? 
+          {popularMoviesList && popularMoviesList.length ?
             popularMoviesList.map((popular) => (
               <HomeBigCard key={popular.id} popular={popular} />
-            )) 
-            : null 
+            ))
+            : null
           }
         </div>
-        <FaChevronRight 
+        <FaChevronRight
           className='hidden sm:block absolute right-[-6px] top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-3xl text-gray-700 pl-3'
           onClick={() => scrollRight(elementRef.current)}
         />
@@ -83,24 +86,24 @@ function Home() {
         <div>
           <span className='text-primary text-lg md:text-2xl'>Trending Movies</span>
         </div>
-        <FaChevronLeft 
-            className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
-            onClick={() => scrollLeft(smallElementRef.current)}
-          />
+        <FaChevronLeft
+          className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
+          onClick={() => scrollLeft(smallElementRef.current)}
+        />
 
-        <div 
+        <div
           className='relative flex gap-5 overflow-x-auto scrollbar-hide p-4 scroll-smooth'
           ref={smallElementRef}
         >
-          {trendingMoviesList && trendingMoviesList.length ? 
+          {trendingMoviesList && trendingMoviesList.length ?
             trendingMoviesList.map((trending) => (
               <MainCard key={trending.id} trending={trending} />
-            )) 
-            : null 
+            ))
+            : null
           }
         </div>
 
-          <FaChevronRight 
+        <FaChevronRight
           className='hidden sm:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
           onClick={() => scrollRight(smallElementRef.current)}
         />
@@ -109,24 +112,24 @@ function Home() {
         <div>
           <span className='text-primary text-lg md:text-2xl'>Popular Tvshows</span>
         </div>
-        <FaChevronLeft 
-            className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
-            onClick={() => scrollLeft(smallElementRef2.current)}
-          />
+        <FaChevronLeft
+          className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
+          onClick={() => scrollLeft(smallElementRef2.current)}
+        />
 
-        <div 
+        <div
           className='relative flex gap-5 overflow-x-auto scrollbar-hide p-4 scroll-smooth'
           ref={smallElementRef2}
         >
-          {PopularTvshowsList && PopularTvshowsList.length ? 
+          {PopularTvshowsList && PopularTvshowsList.length ?
             PopularTvshowsList.map((trending) => (
               <MainCardTv key={trending.id} trending={trending} />
-            )) 
-            : null 
+            ))
+            : null
           }
         </div>
 
-          <FaChevronRight 
+        <FaChevronRight
           className='hidden sm:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
           onClick={() => scrollRight(smallElementRef2.current)}
         />
@@ -135,24 +138,24 @@ function Home() {
         <div>
           <span className='text-primary text-lg md:text-2xl'>Trending Tvshows</span>
         </div>
-        <FaChevronLeft 
-            className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
-            onClick={() => scrollLeft(smallElementRef3.current)}
-          />
+        <FaChevronLeft
+          className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
+          onClick={() => scrollLeft(smallElementRef3.current)}
+        />
 
-        <div 
+        <div
           className='relative flex gap-5 overflow-x-auto scrollbar-hide p-4 scroll-smooth'
           ref={smallElementRef3}
         >
-          {trendingTvshowsList && trendingTvshowsList.length ? 
+          {trendingTvshowsList && trendingTvshowsList.length ?
             trendingTvshowsList.map((trending) => (
               <MainCardTv key={trending.id} trending={trending} />
-            )) 
-            : null 
+            ))
+            : null
           }
         </div>
 
-          <FaChevronRight 
+        <FaChevronRight
           className='hidden sm:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
           onClick={() => scrollRight(smallElementRef3.current)}
         />
@@ -161,24 +164,24 @@ function Home() {
         <div>
           <span className='text-primary text-lg md:text-2xl'>Latest released movies</span>
         </div>
-        <FaChevronLeft 
-            className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
-            onClick={() => scrollLeft(smallElementRef4.current)}
-          />
+        <FaChevronLeft
+          className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
+          onClick={() => scrollLeft(smallElementRef4.current)}
+        />
 
-        <div 
+        <div
           className='relative flex gap-5 overflow-x-auto scrollbar-hide p-4 scroll-smooth'
           ref={smallElementRef4}
         >
-          {latestMovies && latestMovies.length ? 
+          {latestMovies && latestMovies.length ?
             latestMovies.map((trending) => (
               <MainCard key={trending.id} trending={trending} />
-            )) 
-            : null 
+            ))
+            : null
           }
         </div>
 
-          <FaChevronRight 
+        <FaChevronRight
           className='hidden sm:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
           onClick={() => scrollRight(smallElementRef4.current)}
         />
@@ -187,49 +190,54 @@ function Home() {
         <div>
           <span className='text-primary text-lg md:text-2xl'>Latest released Tvshows</span>
         </div>
-        <FaChevronLeft 
-            className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
-            onClick={() => scrollLeft(smallElementRef5.current)}
-          />
+        <FaChevronLeft
+          className='hidden sm:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
+          onClick={() => scrollLeft(smallElementRef5.current)}
+        />
 
-        <div 
+        <div
           className='relative flex gap-5 overflow-x-auto scrollbar-hide p-4 scroll-smooth'
           ref={smallElementRef5}
         >
-          {latestTvShows && latestTvShows.length ? 
+          {latestTvShows && latestTvShows.length ?
             latestTvShows.map((trending) => (
               <MainCardTv key={trending.id} trending={trending} />
-            )) 
-            : null 
+            ))
+            : null
           }
         </div>
 
-          <FaChevronRight 
+        <FaChevronRight
           className='hidden sm:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-lg text-gray-700'
           onClick={() => scrollRight(smallElementRef5.current)}
         />
       </div>
       {showSearchResults && (
-        <div className="fixed inset-0 bg-black bg-opacity-5 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white p-4 rounded shadow-lg relative w-3/4 max-w-xl">
-            <button 
-              onClick={closeModal} 
-              className="absolute top-1 right-8 text-4xl text-red-400"
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity ease-out duration-300">
+          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-xl transition-transform transform-gpu">
+            <button
+              onClick={closeModal}
+              className="absolute p-8 top-4 right-4 text-2xl text-gray-700 hover:text-red-500 focus:outline-none"
             >
-              &times;
+              <FaRegWindowClose />
             </button>
             <div className="max-h-96 overflow-y-auto">
-              <ul className="space-y-2 pt-8">
-                {searchResults.map(movie => (
-                  <li className="flex items-center space-x-4" key={movie.id}>
-                    <span>{movie.title}</span>
+              <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">Search Results</h2>
+              <ul className="space-y-3">
+                {searchResults.length > 0 ? searchResults.map(movie => (
+                  <li key={movie.id} className="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg shadow-sm hover:bg-gray-100 transition-all duration-200 ease-in-out">
+                    <div className="flex-shrink-0">
+                      <img src={`${IMAGE_BASE_URL}${movie.poster_path}`} alt={movie.title} className="w-12 h-16 rounded-md" />
+                    </div>
+                    <span className="font-medium text-lg text-gray-800">{movie.title}</span>
                   </li>
-                ))}
+                )): "Nothing Found!"}
               </ul>
             </div>
           </div>
         </div>
       )}
+
     </div>
   );
 }
